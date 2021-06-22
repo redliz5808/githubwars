@@ -1,22 +1,26 @@
-import logo from './logo.svg';
+import { useApolloClient } from "@apollo/client";
+import { GITHUB_ACCOUNTS } from "queries";
 import './App.css';
 
 function App() {
+  const client = useApolloClient();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const {data: {user}} = await client.query({
+        query: GITHUB_ACCOUNTS,
+        variables: { name: "redliz5808" },
+      });
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <form onSubmit={handleSubmit}><button>Submit</button></form>
       </header>
     </div>
   );
