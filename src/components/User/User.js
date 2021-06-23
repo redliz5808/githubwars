@@ -1,8 +1,4 @@
 const User = ({ user, winnerId, handleDelete }) => {
-  const grandTotal =
-    user.repositories.totalCount +
-    user.followers.totalCount +
-    user.gists.totalCount;
   return (
     <div className="cardContainer">
       <div className="close" onClick={() => handleDelete(user.databaseId)}>
@@ -13,7 +9,7 @@ const User = ({ user, winnerId, handleDelete }) => {
       <p className="stats">Followers: {user.followers.totalCount || 0}</p>
       <p className="stats">Repositories: {user.repositories.totalCount || 0}</p>
       <p className="stats">Gists: {user.gists.totalCount || 0}</p>
-      <p className="total">Total: {grandTotal}</p>
+      <p className="total">Total: {user.grandTotal}</p>
     </div>
   );
 };
