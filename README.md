@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# To Run This App:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Add the .env file
+Please create a .env file in the root folder which contains the following line of code:
+- REACT_APP_GITHUB_SECRET_TOKEN=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
+
+## Run npm install
+- From the terminal, navigate to the project folder. 
+- run `npm install`.
 
 ## Available Scripts
 
@@ -39,6 +45,19 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Adding .env file
-Please create a .env file in the root folder which contains the following line of code:
--`REACT_APP_GITHUB_SECRET_TOKEN=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`
+# Initial Test
+Integrated React App using Apollo GraphQL
+
+## Requirements
+
+- Must use a 3rd party Public GraphQL API available on the internet (Most of them are free)
+- A small react app only (Example, just display the data being fetched on the GraphQL query and add styling to it)
+- You can add more functionalities to it as you like, as long as it doesn't get big
+
+## Instructions
+
+- Create a simple React App using this free Public GraphQL APIs  [https://github.com/APIs-guru/graphql-apis](https://github.com/APIs-guru/graphql-apis) [https://moonhighway.com/public-graphql-apis/](https://moonhighway.com/public-graphql-apis/) or you can check more on the internet on any available APIs, as long as it's GraphQL
+- You can use any UI Library (Bootstrap/Tailwind/Ant Design/Chakra UI and etc...)
+- Must be written in latest version of React
+- Use Apollo Client
+- Create a github repository for this one and send it to **kim@hov.co**
