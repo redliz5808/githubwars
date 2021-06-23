@@ -8,7 +8,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [hasError, setHasError] = useState(false);
   const [users, setUsers] = useState([]);
-  const [highestTotal, setHighestTotal] = useState(0);
   const [winnerId, setWinnerId] = useState(0);
   const client = useApolloClient();
 
@@ -24,12 +23,19 @@ function App() {
         query: GITHUB_ACCOUNTS,
         variables: { name: searchTerm },
       });
-      setUsers([...users, user]);
+      const userTotal = {
+        grandTotal:
+          user.followers.totalCount +
+          user.gists.totalCount +
+          user.repositories.totalCount,
+      };
+      const newUser = Object.assign(userTotal, user);
+      setUsers([...users, newUser]);
     } catch (error) {
       setHasError(true);
       setTimeout(() => {
         setHasError(false);
-      }, 5000);
+      }, 7000);
     }
     setSearchTerm("");
   };
@@ -39,18 +45,12 @@ function App() {
   };
 
   const handleWinner = () => {
-    setHighestTotal(0);
-    users.map((user) => {
-      const userTotal =
-        user.repositories.totalCount +
-        user.followers.totalCount +
-        user.gists.totalCount;
-      if (users.length > 1 && userTotal >= highestTotal) {
-        setHighestTotal(userTotal);
-        setWinnerId(user.databaseId);
-      }
-      return user;
-    });
+    if(users.length > 1) {
+      const winner = users.reduce((prevUser, currentUser) => {
+        return (prevUser.grandTotal > currentUser.grandTotal) ? prevUser : currentUser
+      })
+      setWinnerId(winner.databaseId);
+    }
   };
 
   React.useEffect(() => {
