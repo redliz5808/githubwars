@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useApolloClient } from "@apollo/client";
 import { GITHUB_ACCOUNTS } from "queries";
-import { Header, SearchForm, Examples } from "components";
+import { Header, SearchForm, Examples, Error } from "components";
 import "./App.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [hasError, setHasError] = useState(false);
   const client = useApolloClient();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setHasError(false);
     try {
       const {
         data: { user },
@@ -19,8 +21,12 @@ function App() {
       });
       console.log(user);
     } catch (error) {
-      console.log(error);
+      setHasError(true);
+      setTimeout(() => {
+        setHasError(false);
+      }, 5000)
     }
+    setSearchTerm("");
   };
 
   const handleChange = (e) => {
@@ -37,6 +43,7 @@ function App() {
           searchTerm={searchTerm}
         />
         <Examples />
+        {hasError && <Error />}
       </div>
     </div>
   );
